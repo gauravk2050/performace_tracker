@@ -2,6 +2,12 @@
 
 A comprehensive performance tracking application to monitor your daily activities, tasks, and progress metrics. Track your gym sessions, office tasks, personal tasks, learning activities, reading, and more!
 
+## 🌐 Live Site
+
+**👉 [View Live Application](https://gauravk2050.github.io/performace_tracker/)**
+
+Visit the live site to start tracking your performance right away!
+
 ## Features
 
 - ✅ **Task Management**: Create tasks with custom categories and priorities (low, medium, high, critical)
