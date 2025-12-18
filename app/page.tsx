@@ -17,6 +17,7 @@ export default function Home() {
   const [activities, setActivities] = useState<ActivityLog[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'tasks' | 'activities' | 'tracker' | 'categories' | 'settings'>('dashboard');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setTasks(storage.getTasks());
@@ -43,15 +44,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <nav className="bg-white dark:bg-gray-800 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                <h1 className="text-lg sm:text-2xl font-bold text-indigo-600 dark:text-indigo-400">
                   Performance Tracker
                 </h1>
               </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="hidden sm:ml-6 sm:flex sm:space-x-4 lg:space-x-8">
                 {(['dashboard', 'tasks', 'activities', 'tracker', 'categories', 'settings'] as const).map((tab) => (
                   <button
                     key={tab}
@@ -60,19 +61,55 @@ export default function Home() {
                       activeTab === tab
                         ? 'border-indigo-500 text-gray-900 dark:text-white'
                         : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-                    } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium capitalize`}
+                    } inline-flex items-center px-1 pt-1 border-b-2 text-xs sm:text-sm font-medium capitalize`}
                   >
                     {tab}
                   </button>
                 ))}
               </div>
             </div>
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="sm:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+          {/* Mobile menu */}
+          {mobileMenuOpen && (
+            <div className="sm:hidden border-t border-gray-200 dark:border-gray-700">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {(['dashboard', 'tasks', 'activities', 'tracker', 'categories', 'settings'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`${
+                      activeTab === tab
+                        ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300'
+                        : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
+                    } block px-3 py-2 rounded-md text-base font-medium w-full text-left capitalize`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
+      <main className="max-w-7xl mx-auto py-3 sm:py-6 px-2 sm:px-4 lg:px-8">
+        <div className="py-3 sm:py-6">
           {activeTab === 'dashboard' && (
             <PerformanceDashboard
               tasks={tasks}

@@ -277,23 +277,23 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
   const years = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - 2 + i);
 
   return (
-    <div className="space-y-4 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen p-4">
+    <div className="space-y-3 sm:space-y-4 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen p-2 sm:p-4">
       {/* Header Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-        <div className="flex items-center justify-between mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">HABIT TRACKER</h1>
-            <p className="text-gray-600 dark:text-gray-400">- {monthNames[selectedMonth]} -</p>
+            <h1 className="text-xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400">HABIT TRACKER</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">- {monthNames[selectedMonth]} -</p>
           </div>
-          <div className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">CALENDAR SETTINGS</h3>
-            <div className="flex gap-4">
-              <div>
+          <div className="bg-blue-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg w-full sm:w-auto">
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm sm:text-base">CALENDAR SETTINGS</h3>
+            <div className="flex gap-2 sm:gap-4">
+              <div className="flex-1 sm:flex-initial">
                 <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">YEAR</label>
                 <select
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white"
+                  className="w-full sm:w-auto px-2 sm:px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white"
                 >
                   {years.map((year) => (
                     <option key={year} value={year}>
@@ -302,12 +302,12 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
                   ))}
                 </select>
               </div>
-              <div>
+              <div className="flex-1 sm:flex-initial">
                 <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">MONTH</label>
                 <select
                   value={selectedMonth}
                   onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white"
+                  className="w-full sm:w-auto px-2 sm:px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white"
                 >
                   {monthNames.map((month, index) => (
                     <option key={month} value={index}>
@@ -322,7 +322,7 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
       </div>
 
       {/* Top Section: Charts and Overview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
         {/* Line Chart - Trend */}
         <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Daily Completion Trend</h3>
@@ -404,9 +404,9 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
       </div>
 
       {/* Weekly Progress Overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-        <h3 className="font-semibold text-gray-900 dark:text-white mb-4">OVERVIEW - WEEKLY PROGRESS</h3>
-        <div className="grid grid-cols-5 gap-4 overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 text-sm sm:text-base">OVERVIEW - WEEKLY PROGRESS</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 overflow-x-auto">
           {weeks.map((week) => {
             const stats = weeklyStats.find((s) => s.weekNumber === week.weekNumber);
             if (!stats) return null;
@@ -457,24 +457,26 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
       </div>
 
       {/* Main Tracker Grid - Spreadsheet Style */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 sm:p-4 overflow-x-auto -mx-2 sm:mx-0">
         <div className="inline-block min-w-full">
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse text-xs sm:text-sm">
             <thead>
               <tr>
-                <th className="sticky left-0 z-20 bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-3 text-left font-bold text-gray-900 dark:text-white min-w-[200px]">
-                  DAILY HABITS
+                <th className="sticky left-0 z-20 bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-2 sm:p-3 text-left font-bold text-gray-900 dark:text-white min-w-[120px] sm:min-w-[200px]">
+                  <span className="hidden sm:inline">DAILY HABITS</span>
+                  <span className="sm:hidden">HABITS</span>
                 </th>
-                <th className="bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-3 text-center font-bold text-gray-900 dark:text-white min-w-[80px]">
+                <th className="bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-2 sm:p-3 text-center font-bold text-gray-900 dark:text-white min-w-[50px] sm:min-w-[80px]">
                   GOALS
                 </th>
                 {weeks.map((week) => (
                   <th
                     key={week.weekNumber}
                     colSpan={week.days.length}
-                    className="bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-3 text-center font-bold text-gray-900 dark:text-white"
+                    className="bg-blue-100 dark:bg-blue-900 border border-gray-300 dark:border-gray-600 p-1 sm:p-3 text-center font-bold text-gray-900 dark:text-white text-xs sm:text-sm"
                   >
-                    WEEK {week.weekNumber}
+                    <span className="hidden sm:inline">WEEK {week.weekNumber}</span>
+                    <span className="sm:hidden">W{week.weekNumber}</span>
                   </th>
                 ))}
               </tr>
@@ -485,12 +487,12 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
                   week.days.map((day) => (
                     <th
                       key={day.toISOString()}
-                      className="bg-blue-50 dark:bg-blue-800 border border-gray-300 dark:border-gray-600 p-2 text-center"
+                      className="bg-blue-50 dark:bg-blue-800 border border-gray-300 dark:border-gray-600 p-1 sm:p-2 text-center min-w-[35px] sm:min-w-[50px]"
                     >
-                      <div className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                      <div className="text-[10px] sm:text-xs font-semibold text-gray-700 dark:text-gray-300">
                         {format(day, 'EEE')}
                       </div>
-                      <div className="text-sm font-bold text-gray-900 dark:text-white">
+                      <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">
                         {format(day, 'd')}
                       </div>
                     </th>
@@ -516,11 +518,11 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
                   return (
                     <tr key={task.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                       {/* Task Name */}
-                      <td className="sticky left-0 z-10 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-3 font-medium text-gray-900 dark:text-white">
-                        {task.name}
+                      <td className="sticky left-0 z-10 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-2 sm:p-3 font-medium text-gray-900 dark:text-white text-xs sm:text-sm">
+                        <div className="truncate max-w-[100px] sm:max-w-none">{task.name}</div>
                       </td>
                       {/* Goal */}
-                      <td className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-3 text-center font-semibold text-gray-900 dark:text-white">
+                      <td className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-2 sm:p-3 text-center font-semibold text-gray-900 dark:text-white text-xs sm:text-sm">
                         {goal}
                       </td>
                       {/* Week Checkboxes */}
@@ -533,22 +535,22 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
                           return (
                             <td
                               key={day.toISOString()}
-                              className={`border border-gray-300 dark:border-gray-600 p-2 text-center ${
+                              className={`border border-gray-300 dark:border-gray-600 p-1 sm:p-2 text-center ${
                                 isToday ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-white dark:bg-gray-800'
                               }`}
                             >
                               <button
                                 onClick={() => handleToggleCompletion(task.id, dateStr)}
-                                className={`w-8 h-8 rounded border-2 flex items-center justify-center mx-auto transition-all ${
+                                className={`w-6 h-6 sm:w-8 sm:h-8 rounded border-2 flex items-center justify-center mx-auto transition-all touch-manipulation ${
                                   isCompleted
                                     ? 'bg-green-500 border-green-600 dark:bg-green-600 dark:border-green-700'
-                                    : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-green-400'
+                                    : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-green-400 active:border-green-500'
                                 } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
                                 title={`${format(day, 'MMM d, yyyy')} - ${isCompleted ? 'Mark incomplete' : 'Mark complete'}`}
                               >
                                 {isCompleted && (
                                   <svg
-                                    className="w-5 h-5 text-white"
+                                    className="w-3 h-3 sm:w-5 sm:h-5 text-white"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -574,12 +576,12 @@ export default function TaskTracker({ tasks, activities, onUpdate, onActivityUpd
       </div>
 
       {/* Overall Progress Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-        <h3 className="font-semibold text-gray-900 dark:text-white mb-4">OVERALL PROGRESS</h3>
-        <div className="space-y-3">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 text-sm sm:text-base">OVERALL PROGRESS</h3>
+        <div className="space-y-2 sm:space-y-3">
           {taskProgress.map((item) => (
-            <div key={item.task.id} className="flex items-center gap-4">
-              <div className="w-48 text-sm font-medium text-gray-900 dark:text-white">
+            <div key={item.task.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+              <div className="w-full sm:w-48 text-xs sm:text-sm font-medium text-gray-900 dark:text-white truncate">
                 {item.task.name}
               </div>
               <div className="flex-1">
